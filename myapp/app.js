@@ -32,10 +32,10 @@ app.use('/info', info);
 
 
 // port
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-    console.log("Listen on " + port);
-});
+// var port = Number(process.env.PORT || 5000);
+// app.listen(port, function() {
+//     console.log("Listen on " + port);
+// });
 
 
 /// catch 404 and forward to error handler
