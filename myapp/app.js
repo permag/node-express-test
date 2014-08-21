@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logfmt = require('logfmt');  // Heroku
-
-
 var routes = require('./routes/index');
 var info = require('./routes/info');
 
@@ -15,7 +13,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -23,19 +20,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(logfmt.requestLogger());  // Heroku
-
-
 app.use('/', routes);
 app.use('/info', info);
-
-
-// port
-// var port = Number(process.env.PORT || 5000);
-// app.listen(port, function() {
-//     console.log("Listen on " + port);
-// });
 
 
 /// catch 404 and forward to error handler
@@ -69,11 +56,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// Port
-if (!module.parent) {
-    var port = 5000;
-    app.listen(port);
-    console.log("Express server listening on port %d", port);
-}
+// port
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+    console.log("Listen on port " + port);
+});
 
 module.exports = app;
