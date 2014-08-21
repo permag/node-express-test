@@ -69,4 +69,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// Port
+if (!module.parent) {
+    var port = 5000;
+    app.listen(port);
+    console.log("Express server listening on port %d", port);
+}
+
 module.exports = app;
