@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET info page. */
 router.get('/', function(req, res) {
     res.render('info', {
         title: 'Info page',
