@@ -66,26 +66,3 @@ app.listen(port, function() {
 });
 
 module.exports = app;
-
-
-// DB
-// dev
-// var conString = 'postgres://tbone00:@localhost:5432/nodepg';
-
-// pg.connect(conString, function(err, client, done) {
-//    client.query('SELECT * FROM poll', function(err, result) {
-//       done();
-//       if (err) return console.error(err);
-//       console.log(result.rows);
-//    });
-// });
-
-
-// prod
-// pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-//   client.query('SELECT * FROM poll', function(err, result) {
-//     done();
-//     if (err) return console.error(err);
-//     console.log(result.rows);
-//   });
-// });
