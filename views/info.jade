@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p #{description}
+  h1 Info page
+  - each d in data
+    p #{d.title}: #{d.description}
+
+  p
+    a(href='/info/json') Output as JSON
   p
     a(href='/') Back

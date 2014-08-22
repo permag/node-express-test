@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logfmt.requestLogger());  // Heroku
+
 app.use('/', routes);
 app.use('/info', info);
 
@@ -32,6 +33,7 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
 
 /// error handlers
 
@@ -80,10 +82,10 @@ module.exports = app;
 
 
 // prod
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  client.query('SELECT * FROM poll', function(err, result) {
-    done();
-    if (err) return console.error(err);
-    console.log(result.rows);
-  });
-});
+// pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+//   client.query('SELECT * FROM poll', function(err, result) {
+//     done();
+//     if (err) return console.error(err);
+//     console.log(result.rows);
+//   });
+// });
