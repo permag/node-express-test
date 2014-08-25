@@ -10,7 +10,8 @@ var logfmt = require('logfmt');  // Heroku
 var pg = require('pg');  // PostgreSQL
 
 // custom modules
-var env = require('./env');  // env settings
+var env = require('./modules/env');  // env settings
+// router modules
 var routes = require('./routes/index');
 var info = require('./routes/info')(env.dbConn);  // pass dbConn to router
 
