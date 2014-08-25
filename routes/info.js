@@ -5,12 +5,12 @@ var router = express.Router();
 /* GET info page. */
 
 module.exports = function(dbConn) {
+
     router.get(/\/?(json)?/, function(req, res) {
         pg.connect(dbConn, function(err, client, done) {
            client.query('SELECT * FROM poll', function(err, result) {
                 done();
                 if (err) return console.error(err);
-                // console.log(result.rows);
                 
                 if (req.params[0] === 'json') {
                     res.json(result.rows);
@@ -25,4 +25,4 @@ module.exports = function(dbConn) {
         });
     });
     return router;
-}
+};

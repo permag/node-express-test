@@ -1,16 +1,17 @@
-// env
-var env = process.env.NODE_ENV || 'development';
-var dbConn = null;
-if ('development' === env) {
-    console.log('DEV mode');
-    dbConn = 'postgres://tbone00:@localhost:5432/nodepg';
+// // env
+// var env = process.env.NODE_ENV || 'development';
+// var dbConn = null;
+// if ('development' === env) {
+//     console.log('DEV mode');
+//     dbConn = 'postgres://tbone00:@localhost:5432/nodepg';
 
-} else if ('production' === env) {
-    console.log('PROD mode');
-    dbConn = process.env.DATABASE_URL;
-}
+// } else if ('production' === env) {
+//     console.log('PROD mode');
+//     dbConn = process.env.DATABASE_URL;
+// }
 
-// requires
+// require
+// node modules
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -19,8 +20,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logfmt = require('logfmt');  // Heroku
 var pg = require('pg');  // PostgreSQL
+
+// custom modules
+var env = require('./env');  // env settings
 var routes = require('./routes/index');
-var info = require('./routes/info')(dbConn);
+var info = require('./routes/info')(env.dbConn);  // pass dbConn to router
+
 
 // app
 var app = express();
@@ -40,6 +45,14 @@ app.use(logfmt.requestLogger());  // Heroku
 // routes
 app.use('/', routes);
 app.use('/info', info);
+
+
+
+// port
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+    console.log("Listen on port " + port);
+});
 
 
 /// catch 404 and forward to error handler
@@ -72,12 +85,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
-});
-
-// port
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-    console.log("Listen on port " + port);
 });
 
 
