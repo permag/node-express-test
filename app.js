@@ -1,3 +1,16 @@
+// env
+var env = process.env.NODE_ENV || 'development';
+var dbConn = null;
+if ('development' === env) {
+    console.log('DEV mode');
+    dbConn = 'postgres://tbone00:@localhost:5432/nodepg';
+
+} else if ('production' === env) {
+    console.log('PROD mode');
+    dbConn = process.env.DATABASE_URL;
+}
+
+// requires
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -7,8 +20,9 @@ var bodyParser = require('body-parser');
 var logfmt = require('logfmt');  // Heroku
 var pg = require('pg');  // PostgreSQL
 var routes = require('./routes/index');
-var info = require('./routes/info');
+var info = require('./routes/info')(dbConn);
 
+// app
 var app = express();
 
 // view engine setup
@@ -23,6 +37,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logfmt.requestLogger());  // Heroku
 
+// routes
 app.use('/', routes);
 app.use('/info', info);
 
@@ -64,5 +79,6 @@ var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
     console.log("Listen on port " + port);
 });
+
 
 module.exports = app;
