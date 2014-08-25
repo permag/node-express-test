@@ -6,6 +6,7 @@ module.exports = function() {
 
     var env = process.env.NODE_ENV || 'development';
     var dbConn = null;
+    
     if ('development' === env) {
         console.log('DEV mode');
         dbConn = 'postgres://tbone00:@localhost:5432/nodepg';
