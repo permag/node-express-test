@@ -1,15 +1,3 @@
-// // env
-// var env = process.env.NODE_ENV || 'development';
-// var dbConn = null;
-// if ('development' === env) {
-//     console.log('DEV mode');
-//     dbConn = 'postgres://tbone00:@localhost:5432/nodepg';
-
-// } else if ('production' === env) {
-//     console.log('PROD mode');
-//     dbConn = process.env.DATABASE_URL;
-// }
-
 // require
 // node modules
 var express = require('express');
@@ -50,6 +38,7 @@ app.use('/info', info);
 
 // port
 var port = Number(process.env.PORT || 5000);
+// start server
 app.listen(port, function() {
     console.log("Listen on port " + port);
 });
